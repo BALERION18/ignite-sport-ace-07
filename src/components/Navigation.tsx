@@ -36,7 +36,7 @@ export default function Navigation({ activePage, onPageChange }: NavigationProps
     <>
       {/* Desktop Navigation */}
       <nav className="fixed top-0 left-0 right-0 z-50 glass m-4 rounded-3xl shadow-2xl border border-white/20">
-        <div className="flex items-center justify-between px-8 py-5">
+        <div className="flex items-center justify-between px-8 py-4.7">
           <motion.div 
             className="flex items-center space-x-4"
             initial={{ opacity: 0, x: -20 }}
