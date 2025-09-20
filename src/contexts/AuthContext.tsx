@@ -33,29 +33,36 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<User | null>(null);
   const [session, setSession] = useState<Session | null>(null);
 
+  const fetchUserProfile = async (userId: string) => {
+    const { data: profile } = await supabase
+      .from('profiles')
+      .select('*')
+      .eq('user_id', userId)
+      .single();
+      
+    if (profile) {
+      setUser({
+        id: profile.user_id,
+        name: profile.name,
+        email: profile.email,
+        role: profile.role as UserRole,
+        athleteIds: profile.athlete_ids || undefined
+      });
+    }
+  };
+
   useEffect(() => {
-    // Set up auth state listener FIRST
+    // Set up auth state listener FIRST (must be synchronous)
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
-      async (event, session) => {
+      (event, session) => {
+        // Only synchronous state updates here
         setSession(session);
         
+        // Defer Supabase calls with setTimeout to prevent deadlock
         if (session?.user) {
-          // Fetch user profile from our profiles table
-          const { data: profile } = await supabase
-            .from('profiles')
-            .select('*')
-            .eq('user_id', session.user.id)
-            .single();
-            
-          if (profile) {
-            setUser({
-              id: profile.user_id,
-              name: profile.name,
-              email: profile.email,
-              role: profile.role as UserRole,
-              athleteIds: profile.athlete_ids || undefined
-            });
-          }
+          setTimeout(() => {
+            fetchUserProfile(session.user.id);
+          }, 0);
         } else {
           setUser(null);
         }
@@ -66,23 +73,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     supabase.auth.getSession().then(({ data: { session } }) => {
       setSession(session);
       if (session?.user) {
-        // Fetch user profile
-        supabase
-          .from('profiles')
-          .select('*')
-          .eq('user_id', session.user.id)
-          .single()
-          .then(({ data: profile }) => {
-            if (profile) {
-              setUser({
-                id: profile.user_id,
-                name: profile.name,
-                email: profile.email,
-                role: profile.role as UserRole,
-                athleteIds: profile.athlete_ids || undefined
-              });
-            }
-          });
+        fetchUserProfile(session.user.id);
       }
     });
 
