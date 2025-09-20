@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, Zap, Users, Trophy, BarChart, LogOut, User } from 'lucide-react';
+import { Menu, X, Zap, Users, Trophy, BarChart, LogOut, User, ChevronDown } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
 import { useAuth } from '@/contexts/AuthContext';
 
 interface NavigationProps {
@@ -84,24 +85,42 @@ export default function Navigation({ activePage, onPageChange }: NavigationProps
               ))}
             </div>
             
-            {/* User Info & Logout */}
-            <div className="flex items-center space-x-3 ml-4">
-              <div className="flex items-center space-x-2 px-3 py-2 bg-black/20 rounded-xl backdrop-blur-sm">
-                <User className="w-4 h-4 text-muted-foreground" />
-                <span className="text-sm font-medium text-foreground">{user?.name}</span>
-                <span className="text-xs px-2 py-1 bg-primary/20 text-primary rounded-full capitalize">
-                  {user?.role}
-                </span>
-              </div>
-              <Button
-                variant="ghost"
-                size="sm"
-                onClick={handleLogout}
-                className="text-muted-foreground hover:text-destructive"
-              >
-                <LogOut className="w-4 h-4" />
-              </Button>
-            </div>
+            {/* User Dropdown */}
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button
+                  variant="ghost"
+                  className="w-36 h-12 px-4 py-3 rounded-xl transition-all duration-300 relative overflow-hidden group bg-black/20 backdrop-blur-sm hover:bg-white/10 hover:text-primary"
+                >
+                  <div className="flex items-center space-x-2 relative z-10">
+                    <User className="w-5 h-5 flex-shrink-0" />
+                    <span className="font-medium text-sm truncate">{user?.name}</span>
+                    <ChevronDown className="w-4 h-4 flex-shrink-0" />
+                  </div>
+                  <div className="absolute inset-0 bg-gradient-to-r from-primary/20 to-secondary/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent className="w-56 z-50 bg-background border border-border shadow-lg">
+                <DropdownMenuLabel>Account Information</DropdownMenuLabel>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem disabled>
+                  <User className="mr-2 h-4 w-4" />
+                  <div className="flex flex-col">
+                    <span className="font-medium">{user?.name}</span>
+                    <span className="text-xs text-muted-foreground">{user?.email}</span>
+                  </div>
+                </DropdownMenuItem>
+                <DropdownMenuItem disabled>
+                  <Trophy className="mr-2 h-4 w-4" />
+                  <span className="capitalize">{user?.role}</span>
+                </DropdownMenuItem>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem onClick={handleLogout} className="text-destructive focus:text-destructive">
+                  <LogOut className="mr-2 h-4 w-4" />
+                  <span>Logout</span>
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
           </div>
 
           {/* Mobile Menu Button */}
