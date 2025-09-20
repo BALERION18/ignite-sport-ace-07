@@ -22,34 +22,34 @@ All colors MUST be HSL.
     --glass-overlay: 0 0% 100% / 0.06;
     --glass-border: 0 0% 100% / 0.1;
 
-    --card: var(--dark-navy);
+    --card: 220 26% 6%;
     --card-foreground: 210 40% 98%;
 
-    --popover: var(--dark-navy);
+    --popover: 220 26% 6%;
     --popover-foreground: 210 40% 98%;
 
-    --primary: var(--electric-blue);
+    --primary: 215 100% 50%;
     --primary-foreground: 210 40% 98%;
 
-    --secondary: var(--neon-green);
-    --secondary-foreground: var(--dark-navy);
+    --secondary: 140 100% 50%;
+    --secondary-foreground: 220 26% 6%;
 
     --muted: 220 26% 14%;
     --muted-foreground: 215.4 16.3% 65%;
 
-    --accent: var(--neon-green);
-    --accent-foreground: var(--dark-navy);
+    --accent: 140 100% 50%;
+    --accent-foreground: 220 26% 6%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
 
     --border: 220 26% 18%;
     --input: 220 26% 18%;
-    --ring: var(--electric-blue);
+    --ring: 215 100% 50%;
     
     /* Custom gradients */
-    --gradient-hero: linear-gradient(135deg, var(--electric-blue), var(--neon-green));
-    --gradient-glass: linear-gradient(135deg, var(--glass-overlay), transparent);
+    --gradient-hero: linear-gradient(135deg, hsl(215 100% 50%), hsl(140 100% 50%));
+    --gradient-glass: linear-gradient(135deg, hsl(0 0% 100% / 0.06), transparent);
     
     /* Animations */
     --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -58,19 +58,12 @@ All colors MUST be HSL.
     --radius: 0.5rem;
 
     --sidebar-background: 0 0% 98%;
-
     --sidebar-foreground: 240 5.3% 26.1%;
-
     --sidebar-primary: 240 5.9% 10%;
-
     --sidebar-primary-foreground: 0 0% 98%;
-
     --sidebar-accent: 240 4.8% 95.9%;
-
     --sidebar-accent-foreground: 240 5.9% 10%;
-
     --sidebar-border: 220 13% 91%;
-
     --sidebar-ring: 217.2 91.2% 59.8%;
   }
 
