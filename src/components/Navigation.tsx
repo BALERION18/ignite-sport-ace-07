@@ -94,8 +94,8 @@ export default function Navigation({ activePage, onPageChange }: NavigationProps
                 >
                   <div className="flex items-center justify-between w-full relative z-10">
                     <div className="flex items-center space-x-2 min-w-0">
-                      <Users className="w-5 h-5 flex-shrink-0 text-foreground" />
-                      <span className="font-medium text-base text-foreground">{user?.name}</span>
+                      <User className="w-5 h-5 flex-shrink-0 text-foreground" />
+                      <span className="font-medium text-sm truncate text-foreground">{user?.name}</span>
                     </div>
                     <ChevronDown className="w-4 h-4 flex-shrink-0 ml-1 text-foreground" />
                   </div>
