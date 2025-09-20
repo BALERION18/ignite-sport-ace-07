@@ -23,7 +23,7 @@ export default function CoachDashboard({ onSectionChange }: CoachDashboardProps)
   const allAthletes = [
     {
       id: '1',
-      name: "John Smith",
+      name: "Risabh Singh",
       age: 19,
       sport: "Sprint",
       location: "Maharashtra", 
@@ -35,7 +35,7 @@ export default function CoachDashboard({ onSectionChange }: CoachDashboardProps)
     },
     {
       id: '2',
-      name: "Sarah Johnson", 
+      name: "Asha Verma", 
       age: 21,
       sport: "Long Jump",
       location: "Kerala",
@@ -47,7 +47,7 @@ export default function CoachDashboard({ onSectionChange }: CoachDashboardProps)
     },
     {
       id: '3',
-      name: "Mike Wilson",
+      name: "Kidambi Srikanth",
       age: 18,
       sport: "Hurdles", 
       location: "Gujarat",
@@ -59,7 +59,7 @@ export default function CoachDashboard({ onSectionChange }: CoachDashboardProps)
     },
     {
       id: '4',
-      name: "Emma Davis",
+      name: "Priya Kalra",
       age: 20,
       sport: "High Jump",
       location: "Punjab", 
