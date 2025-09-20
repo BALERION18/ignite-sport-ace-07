@@ -5,8 +5,8 @@ import { Button } from '@/components/ui/button';
 export default function Footer() {
   const contactInfo = [
     { icon: Mail, label: 'Email', value: 'contact@esylium.com', href: 'mailto:contact@esylium.com' },
-    { icon: Phone, label: 'Phone', value: '+1 (555) 123-4567', href: 'tel:+15551234567' },
-    { icon: MapPin, label: 'Address', value: 'Silicon Valley, CA', href: '#' }
+    { icon: Phone, label: 'Phone', value: '+91 94562-24566 ', href: 'tel:+91 94562-24566 ' },
+    { icon: MapPin, label: 'Address', value: 'Ghaziabad, UP', href: '#' }
   ];
 
   const socialLinks = [
