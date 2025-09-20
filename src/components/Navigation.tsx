@@ -105,8 +105,11 @@ export default function Navigation({ activePage, onPageChange }: NavigationProps
               <DropdownMenuContent className="w-56 z-50 bg-background border border-border shadow-lg">
                 <DropdownMenuLabel>Account Information</DropdownMenuLabel>
                 <DropdownMenuSeparator />
-                <DropdownMenuItem disabled>
+                <DropdownMenuItem onClick={() => onPageChange('profile')}>
                   <User className="mr-2 h-4 w-4" />
+                  <span>Edit Profile</span>
+                </DropdownMenuItem>
+                <DropdownMenuItem disabled>
                   <div className="flex flex-col">
                     <span className="font-medium">{user?.name}</span>
                     <span className="text-xs text-muted-foreground">{user?.email}</span>
@@ -116,6 +119,14 @@ export default function Navigation({ activePage, onPageChange }: NavigationProps
                   <Trophy className="mr-2 h-4 w-4" />
                   <span className="capitalize">{user?.role}</span>
                 </DropdownMenuItem>
+                {user?.sports && user.sports.length > 0 && (
+                  <DropdownMenuItem disabled>
+                    <div className="flex flex-col">
+                      <span className="text-xs text-muted-foreground">Sports:</span>
+                      <span className="text-xs">{user.sports.slice(0, 2).join(', ')}{user.sports.length > 2 ? '...' : ''}</span>
+                    </div>
+                  </DropdownMenuItem>
+                )}
                 <DropdownMenuSeparator />
                 <DropdownMenuItem onClick={handleLogout} className="text-destructive focus:text-destructive">
                   <LogOut className="mr-2 h-4 w-4" />

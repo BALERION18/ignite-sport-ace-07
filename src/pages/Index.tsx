@@ -8,6 +8,7 @@ import AIAnalysis from './AIAnalysis';
 import Athlete from './Athlete';
 import Coach from './Coach';
 import LeaderboardPage from './LeaderboardPage';
+import Profile from './Profile';
 
 const Index = () => {
   const { isAuthenticated, user } = useAuth();
@@ -38,6 +39,8 @@ const Index = () => {
         return <Coach onNavigate={handlePageChange} />;
       case 'leaderboard':
         return <LeaderboardPage />;
+      case 'profile':
+        return <Profile onNavigate={handlePageChange} />;
       default:
         return <Home onNavigate={handlePageChange} />;
     }

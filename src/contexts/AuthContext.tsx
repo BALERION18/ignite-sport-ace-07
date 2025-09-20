@@ -10,6 +10,7 @@ export interface User {
   email: string;
   role: UserRole;
   athleteIds?: string[]; // For coaches - list of athletes under them
+  sports?: string[]; // Sports the user plays
 }
 
 interface AuthContextType {
@@ -46,7 +47,8 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         name: profile.name,
         email: profile.email,
         role: profile.role as UserRole,
-        athleteIds: profile.athlete_ids || undefined
+        athleteIds: profile.athlete_ids || undefined,
+        sports: profile.sports || undefined
       });
     }
   };
