@@ -90,12 +90,14 @@ export default function Navigation({ activePage, onPageChange }: NavigationProps
               <DropdownMenuTrigger asChild>
                 <Button
                   variant="ghost"
-                  className="w-36 h-12 px-4 py-3 rounded-xl transition-all duration-300 relative overflow-hidden group bg-black/20 backdrop-blur-sm hover:bg-white/10 hover:text-primary"
+                  className="w-36 h-12 px-3 py-2 rounded-xl transition-all duration-300 relative overflow-hidden group bg-black/20 backdrop-blur-sm hover:bg-white/10 hover:text-primary text-foreground"
                 >
-                  <div className="flex items-center space-x-2 relative z-10">
-                    <User className="w-5 h-5 flex-shrink-0" />
-                    <span className="font-medium text-sm truncate">{user?.name}</span>
-                    <ChevronDown className="w-4 h-4 flex-shrink-0" />
+                  <div className="flex items-center justify-between w-full relative z-10">
+                    <div className="flex items-center space-x-2 min-w-0">
+                      <User className="w-5 h-5 flex-shrink-0" />
+                      <span className="font-medium text-sm truncate text-foreground">{user?.name}</span>
+                    </div>
+                    <ChevronDown className="w-4 h-4 flex-shrink-0 ml-1" />
                   </div>
                   <div className="absolute inset-0 bg-gradient-to-r from-primary/20 to-secondary/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 </Button>
