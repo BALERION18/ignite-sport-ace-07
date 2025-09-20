@@ -18,7 +18,7 @@ export default function Navigation({ activePage, onPageChange }: NavigationProps
     { id: 'home', label: 'Home', icon: Zap, roles: ['athlete', 'coach'] },
     { id: 'analysis', label: 'AI Analysis', icon: BarChart, roles: ['athlete', 'coach'] },
     { id: 'athlete', label: 'Athlete Hub', icon: Users, roles: ['athlete'] },
-    { id: 'coach', label: 'Coach Dashboard', icon: Trophy, roles: ['coach'] },
+    { id: 'coach', label: 'Dashboard', icon: Trophy, roles: ['coach'] },
     { id: 'leaderboard', label: 'Leaderboard', icon: Trophy, roles: ['athlete', 'coach'] },
   ];
 
