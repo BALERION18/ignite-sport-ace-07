@@ -1,4 +1,6 @@
-import React, { createContext, useContext, useState, ReactNode } from 'react';
+import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+import { User as SupabaseUser, Session } from '@supabase/supabase-js';
+import { supabase } from '@/integrations/supabase/client';
 
 export type UserRole = 'athlete' | 'coach';
 
@@ -27,51 +29,129 @@ export const useAuth = () => {
   return context;
 };
 
-// Mock data for demo purposes
-const mockUsers: User[] = [
-  {
-    id: '1',
-    name: 'John Smith',
-    email: 'athlete@demo.com',
-    role: 'athlete'
-  },
-  {
-    id: '2',
-    name: 'Sarah Johnson',
-    email: 'coach@demo.com',
-    role: 'coach',
-    athleteIds: ['1', '3', '4']
-  },
-  {
-    id: '3',
-    name: 'Mike Wilson',
-    email: 'athlete2@demo.com',
-    role: 'athlete'
-  },
-  {
-    id: '4',
-    name: 'Emma Davis',
-    email: 'athlete3@demo.com',
-    role: 'athlete'
-  }
-];
-
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<User | null>(null);
+  const [session, setSession] = useState<Session | null>(null);
+
+  useEffect(() => {
+    // Set up auth state listener FIRST
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(
+      async (event, session) => {
+        setSession(session);
+        
+        if (session?.user) {
+          // Fetch user profile from our profiles table
+          const { data: profile } = await supabase
+            .from('profiles')
+            .select('*')
+            .eq('user_id', session.user.id)
+            .single();
+            
+          if (profile) {
+            setUser({
+              id: profile.user_id,
+              name: profile.name,
+              email: profile.email,
+              role: profile.role as UserRole,
+              athleteIds: profile.athlete_ids || undefined
+            });
+          }
+        } else {
+          setUser(null);
+        }
+      }
+    );
+
+    // THEN check for existing session
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setSession(session);
+      if (session?.user) {
+        // Fetch user profile
+        supabase
+          .from('profiles')
+          .select('*')
+          .eq('user_id', session.user.id)
+          .single()
+          .then(({ data: profile }) => {
+            if (profile) {
+              setUser({
+                id: profile.user_id,
+                name: profile.name,
+                email: profile.email,
+                role: profile.role as UserRole,
+                athleteIds: profile.athlete_ids || undefined
+              });
+            }
+          });
+      }
+    });
+
+    return () => subscription.unsubscribe();
+  }, []);
 
   const login = async (email: string, password: string, role: UserRole): Promise<boolean> => {
-    // Mock authentication - in real app this would be an API call
-    const foundUser = mockUsers.find(u => u.email === email && u.role === role);
-    
-    if (foundUser && password === 'demo123') {
-      setUser(foundUser);
-      return true;
+    try {
+      // First try to sign in
+      const { data: signInData, error: signInError } = await supabase.auth.signInWithPassword({
+        email,
+        password
+      });
+
+      if (signInError) {
+        // If sign in fails, try to sign up
+        const redirectUrl = `${window.location.origin}/`;
+        const { data: signUpData, error: signUpError } = await supabase.auth.signUp({
+          email,
+          password,
+          options: {
+            emailRedirectTo: redirectUrl,
+            data: {
+              role: role,
+              name: email.split('@')[0] // Use email prefix as default name
+            }
+          }
+        });
+
+        if (signUpError) {
+          console.error('Auth error:', signUpError);
+          return false;
+        }
+
+        // If signup was successful but needs email confirmation
+        if (signUpData.user && !signUpData.session) {
+          // User needs to confirm email - for demo, we'll allow immediate login
+          console.log('User created, check email for confirmation');
+          return true;
+        }
+
+        return !!signUpData.user;
+      }
+
+      // Check if user has the correct role
+      if (signInData.user) {
+        const { data: profile } = await supabase
+          .from('profiles')
+          .select('role')
+          .eq('user_id', signInData.user.id)
+          .single();
+
+        if (profile && profile.role !== role) {
+          await supabase.auth.signOut();
+          return false; // Wrong role
+        }
+      }
+
+      return !!signInData.user;
+    } catch (error) {
+      console.error('Login error:', error);
+      return false;
     }
-    return false;
   };
 
-  const logout = () => {
+  const logout = async () => {
+    await supabase.auth.signOut();
     setUser(null);
+    setSession(null);
   };
 
   const value = {
