@@ -1,73 +1,75 @@
-# Welcome to your Lovable project
+<div align="center">
 
-## Project info
+# Genignite Pre-Hackathon
 
-**URL**: https://lovable.dev/projects/baac79c8-7273-470d-9bbe-a927c55efe60
+<img src="assets/logo/f58664d6c437.jpg" alt="Genignite Pre-Hackathon Logo"/>
 
-## How can I edit this code?
+<br/>
 
-There are several ways of editing your application.
+---
 
-**Use Lovable**
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/baac79c8-7273-470d-9bbe-a927c55efe60) and start prompting.
+</div>
 
-Changes made via Lovable will be committed automatically to this repo.
+## 1. Problem Statement Name
 
-**Use your preferred IDE**
+AI-Powered Sports Ecosystem
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+---
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+## 2. Problem Statement Description
 
-Follow these steps:
+"Discover hidden sports talent through AI-powered video analysis and performance tracking. Provide athletes and coaches with a digital ecosystem for growth, engagement, and community."
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+---
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+## 3. Project Overview
 
-# Step 3: Install the necessary dependencies.
-npm i
+Elysium is an AI-powered sports talent ecosystem that helps athletes showcase skills, track performance, and connect with coaches and communities. The platform features role-based dashboards, video-based assessments, gamified challenges, and progress analytics. The hackathon MVP focuses on interactivity, clean UI, and scalable design with placeholder AI and API integrations.
+---
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
-```
+## 4. Architecture
 
-**Edit a file directly in GitHub**
+- **Frontend:** React.js dashboard for admins, students, and teachers  
+- **Backend:** Supabase for authentication, Database
+- **Database:** Postgre  
+- **AI Services:** Mediapipe, Open cv  
+- **Deployment:** Deployed using Vercel
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+---
 
-**Use GitHub Codespaces**
+## 5. Tech Stack
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+- Frontend → Built with React+ TypeScript
+- Backend → Supabase (PostgreSQL Database, Authentication, APIs)
+- Database → Supabase PostgreSQL (cloud-hosted).
+- AI/ML → MediaPipe Pose Model + OpenCV (via Lovable) → for sports movement & posture  analysis.
+           Chatbase with OpenAI GPT-4o → for intelligent chatbot support
+- Authentication → Supabase Auth (email/password, OAuth, JWT-based sessions).
+- Deployment → Hosted on Vercel
 
-## What technologies are used for this project?
 
-This project is built with:
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+---
 
-## How can I deploy this project?
+## 6. Team Name
 
-Simply open [Lovable](https://lovable.dev/projects/baac79c8-7273-470d-9bbe-a927c55efe60) and click on Share -> Publish.
+VERTEX
 
-## Can I connect a custom domain to my Lovable project?
+---
 
-Yes, you can!
+## 7. Team Members & Details
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+| Name                | Role                | Email                       | LinkedIn                        | College Name                   |
+|---------------------|---------------------|-----------------------------|---------------------------------|--------------------------------|
+| Vivek Singh         | Team Lead           |vy4715@gmail.com             | [LinkedIn](https://www.linkedin.com/in/vivek-yadav9598/) | NIET  |
+| Divyansh Patel      | Full-Stack          |logdivyansh@gmail.com        | [LinkedIn](https://www.linkedin.com/in/divyansh-patel18/)| NIET  |
+| Raj Patel           |   Design            | therajpatel8041@gmail.com   | [LinkedIn](https://www.linkedin.com/in/raj-patel-a03233280?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app)                                               | NIET  |   
+| Adarsh Singh        | Front-end           |adarshsss0907@gmail.com      | [LinkedIn](https://www.linkedin.com/in/adarsh-singh-0b924924a/)| GL BAJAJ  |
+---
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+## 8. Additional Links
+
+- [Deployed App](https://esylium.vercel.app/)
+
+---
